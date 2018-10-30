@@ -28,21 +28,31 @@
          <font size="3" color="red">InActive</font>
          @endif
       </td>
-      <td>-</td>
-      <td>
-         @if($user->created_at)
-         {{ $user->created_at->toFormattedDateString() }}
+     
+        <td>
+            @foreach($user->roles as $role)
+                <table>
+                    @if($role->pivot->role_id == $role->id)
+                        <td>
+                            {{$role->role_name}}
+                        </td>
+                    @endif
+                </table>
+            @endforeach           
+        </td>
+      
+         @if($user->created_at == NULL)
+         <td>-</td>
          @else
-         {{ $user->created_at }}
+        <td>{{ $user->created_at }}</td>
          @endif
-      </td>
-      <td>
-         @if($user->created_at)
-         {{ $user->updated_at->toFormattedDateString() }}
+
+         @if($user->updated_at == NULL)
+         <td>- </td>
          @else
-         {{ $user->created_at }}
+         <td>{{ $user->updated_at->toFormattedDateString() }}</td>
          @endif
-      </td>
+     
       <td>
          @if( $user->deleted==1 )
          <font size="3" color="red">deleted</font>
@@ -78,9 +88,10 @@
             </div>
             <div class="modal-body">
                 <form action="/userrole/{{$user->id}}" method="POST">
-                    <div class="form-group">
+                    {{ csrf_field() }}
+                    <div class="form-group col-md-6">
                       <label for="userrole">Choose a Role</label>
-                      <select name="userrole" id="">
+                      <select name="role_id" id="" class="form-control">
                           <option value="">Select a Role</option>
                           @foreach($roles as $role)
                              <option value={{$role->id}}>{{$role->role_name}}</option>
@@ -98,6 +109,7 @@
         </div>
         </div>
       <td><a href ="/users/edit/{{$user->id}}" class="btn btn-sm btn-primary">edit</a></td>
+      <td><a href="/userrole/{{$user->id}}"  class="btn btn-sm btn-success">View and Manage User Role</a></td>
       <td>
          @if(Auth::user()->id != $user->id)
          <form action="/usersdelete/{{$user->id}}" method="post" onsubmit()="are you sure you want to delete">

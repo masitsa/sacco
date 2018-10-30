@@ -33,3 +33,6 @@ Route::post('/roles', 'RoleController@store');
 Route::post('/userrole/{id}', 'RoleController@storeUserRole');
 Route::patch('/roles/{id}', 'RoleController@update');
 Route::patch('/roles/{id}', 'RoleController@destroy');
+Route::get('/userrole/{id}', 'RoleController@viewUserRole');
+Route::patch('/userroleupdate/{id}', 'RoleController@updateUserRole');
+Route::patch('/userroledestroy/{id}', 'RoleController@destroyUserRole');
