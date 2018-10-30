@@ -25,10 +25,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+   
     public function userRoles()
     {
         return $this->hasMany('App\UserRole');
     }
+   
     public function roles()
     {
         return $this->belongsToMany(Role::class)
@@ -36,6 +38,7 @@ class User extends Authenticatable
             ->withTimestamps();
     }
 
+   
     public function userLoginSessions()
     {
         return $this->hasMany('App\UserLoginSession');

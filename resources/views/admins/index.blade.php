@@ -89,9 +89,9 @@
             <div class="modal-body">
                 <form action="/userrole/{{$user->id}}" method="POST">
                     {{ csrf_field() }}
-                    <div class="form-group col-md-6">
+                    <div class="form-group">
                       <label for="userrole">Choose a Role</label>
-                      <select name="role_id" id="" class="form-control">
+                      <select name="role_id" id="">
                           <option value="">Select a Role</option>
                           @foreach($roles as $role)
                              <option value={{$role->id}}>{{$role->role_name}}</option>
