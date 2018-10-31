@@ -34,6 +34,7 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class)
+            ->withPivot('role_user_status', 'deleted', 'deleted_on', 'deleted_by', 'created_by')
             ->withTimestamps();
     }
 
