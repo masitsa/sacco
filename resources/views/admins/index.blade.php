@@ -22,32 +22,42 @@
       <td>{{ $user->user_first_name }} </td>
       <td>{{ $user->user_last_name }} </td>
       <td>{{ $user->email }}</td>
-      <td> @if( $user->user_status== 1 || $user->deleted_by == 0)
+      <td> @if( $user->user_status==1)
          <font size="3" color="green">Active</font>
          @else()
          <font size="3" color="red">InActive</font>
          @endif
       </td>
-      <td>-</td>
-      <td>
-         @if($user->created_at)
-         {{ $user->created_at->toFormattedDateString() }}
+     
+        <td>
+            @foreach($user->roles as $role)
+                <table>
+                    @if($role->pivot->role_id == $role->id)
+                        <td>
+                            {{$role->role_name}}
+                        </td>
+                    @endif
+                </table>
+            @endforeach           
+        </td>
+      
+         @if($user->created_at == NULL)
+         <td>-</td>
          @else
-         ___
+        <td>{{ $user->created_at }}</td>
          @endif
-      </td>
-      <td>
-         @if($user->created_at)
-         {{ $user->updated_at->toFormattedDateString() }}
+
+         @if($user->updated_at == NULL)
+         <td>- </td>
          @else
-         ___
+         <td>{{ $user->updated_at->toFormattedDateString() }}</td>
          @endif
-      </td>
+     
       <td>
          @if( $user->deleted==1 )
          <font size="3" color="red">deleted</font>
          @else()
-         ___
+         Not deleted
          @endif
       </td>
       <td>{{ $user->deleted_on }}</td>
@@ -55,12 +65,9 @@
          @foreach($users as $item)
          @if($item->id==$user->deleted_by)
          {{$item->user_first_name}}
-         @elseif($user->deleted_by== null)
-         _
          @endif
          @endforeach
       </td>
-      @if($user->deleted_on ==0 || Auth::user()->id)
       <td><!-- Button trigger modal -->
         
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#assignRoleModal">
@@ -81,9 +88,10 @@
             </div>
             <div class="modal-body">
                 <form action="/userrole/{{$user->id}}" method="POST">
-                    <div class="form-group">
+                    {{ csrf_field() }}
+                    <div class="form-group col-md-6">
                       <label for="userrole">Choose a Role</label>
-                      <select name="userrole" id="">
+                      <select name="role_id" id="" class="form-control">
                           <option value="">Select a Role</option>
                           @foreach($roles as $role)
                              <option value={{$role->id}}>{{$role->role_name}}</option>
@@ -101,17 +109,16 @@
         </div>
         </div>
       <td><a href ="/users/edit/{{$user->id}}" class="btn btn-sm btn-primary">edit</a></td>
+      <td><a href="/userrole/{{$user->id}}"  class="btn btn-sm btn-success">View and Manage User Role</a></td>
       <td>
+         @if(Auth::user()->id != $user->id)
          <form action="/usersdelete/{{$user->id}}" method="post" onsubmit()="are you sure you want to delete">
             {{ csrf_field() }}
             {{ method_field('PATCH') }}
             <button class="btn btn-sm btn-danger"  type="submit">delete</button>
          </form>
+         @endif
       </td>
-      @elseif($user->deleted_on ==1)
-      <td><button type="disabled">deleted</button></td>
-      <td><button type="disabled">deleted</button></td>
-      @endif
    </tr>
    @endforeach
 </table>

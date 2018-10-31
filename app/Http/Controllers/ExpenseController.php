@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Expense;
+use App\User;
+use App\ExpenseType;
+use Auth;
 class ExpenseController extends Controller
 {
     /**
@@ -14,6 +17,10 @@ class ExpenseController extends Controller
     public function index()
     {
         //
+        $users = User::all();
+        $expenses = Expense::all();
+
+        return view('Expenses.index',compact('users','expenses'));
     }
 
     /**
@@ -24,6 +31,8 @@ class ExpenseController extends Controller
     public function create()
     {
         //
+        $expensesTypes = ExpenseType::all();
+        return view('Expenses.createExpense', compact('expensesTypes'));
     }
 
     /**
@@ -35,6 +44,15 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate(request(), [
+            'expense_name' => 'required',
+            'expense_type_id' => 'required',
+        ]);
+         Expense::create(request([
+            'expense_name' , 'expense_type_id' ,  'created_by' => Auth::user()->id
+        ]));
+        session()->flash("success message", "you have created an expense");
+        return redirect('/expenses');
     }
 
     /**

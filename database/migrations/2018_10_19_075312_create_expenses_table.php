@@ -17,7 +17,7 @@ class CreateExpensesTable extends Migration
             $table->increments('id');
             $table->string('expense_name', 100);
             $table->integer('expense_type_id');
-            $table->tinyInteger('deleted')->deafult(0);
+            $table->tinyInteger('deleted')->default(0);
             $table->date('deleted_on')->nullable();
             $table->integer('deleted_by')->nullable();
             $table->integer('created_by')->nullable();
