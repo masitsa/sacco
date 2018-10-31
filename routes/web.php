@@ -45,16 +45,27 @@ Route::get('/nextOfKin/edit/{id}', 'NextofKinController@edit');
 Route::patch('/nextOfKin/{id}', 'NextofKinController@update');
 Route::get('/nextOfKin/delete/{id}','NextofKinController@destroy');
 
-//expenses
+//expenses routes
 Route::get('/expenses', 'ExpenseController@index');
 Route::get('/addexpense', 'ExpenseController@create');
-Route::post('/expense', 'ExpenseController@store');
+Route::post('/addExpense', 'ExpenseController@store');
 
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/admins','HomeController@adminHome');
 
+//role routes
+Route::get('/roles', 'RoleController@index');
+Route::get('/role/create', 'RoleController@create');
+Route::get('/roles/edit/{id}', 'RoleController@edit');
+Route::post('/roles', 'RoleController@store');
+Route::post('/userrole/{id}', 'RoleController@storeUserRole');
+Route::patch('/roles/{id}', 'RoleController@update');
+Route::patch('/roles/{id}', 'RoleController@destroy');
+Route::get('/userrole/{id}', 'RoleController@viewUserRole');
+Route::patch('/userroleupdate/{id}', 'RoleController@updateUserRole');
+Route::patch('/userroledestroy/{id}', 'RoleController@destroyUserRole');
 
 //Loans routes
 Route::get('/loanApplication', 'LoanController@index' );
@@ -70,7 +81,6 @@ Route::get('/amortization', 'LoanAmortizationController@index' );
 // } );
 Route::get('/amortizationSearch/{name}', 'LoanAmortizationController@create' );
 Route::get('/fetchLoans/{id}', 'LoanAmortizationController@fetchLoans' );
-Route::get('/calculateAmortization/{id}', 'LoanAmortizationController@calculateAmortization' );
 //members
 Route::get('/members', 'MemberController@index');
 Route::get('/members/create', 'MemberController@create');

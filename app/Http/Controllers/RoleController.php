@@ -32,14 +32,29 @@ class RoleController extends Controller
     {
         return view('roles.create');
     }
+    public function viewUserRole($id)
+    {
+        $user = User::find($id);
+        $allroles = Role::all();
+        // dd($user);
+        return view('admins.viewuserrole', compact('user', 'allroles'));
+    }
     public function storeUserRole(Request $request, $id)
     {
+        $this->validate(request(), [
+            'role_id' => 'required|unique:role_user',
 
-        $role = $request->userrole;
-        // $user = User::find($id);
-        // $user->roles->attach($role);
-        dd($role);
-        // return redirect('/roles');
+        ]);
+        $role = $request->role_id;
+
+        $user = User::find($id);
+       
+        
+        // App\User::find(1)->roles()->save($role, ['expires' => $expires]);
+        // $user->roles()->attach($role);
+
+        $user->roles()->attach($role, array('role_user_status' => 1, 'deleted' => 0, 'created_by' => Auth::user()->id));
+        return back();
     }
 
     /**
@@ -105,6 +120,16 @@ class RoleController extends Controller
             ->update(request(['role_name', 'role_status']));
         return redirect('/roles');
     }
+    public function updateUserRole(Request $request, $id)
+    {
+        $role = $request->role_id;
+        $role_user_status = $request->role_user_status;
+        $user = User::find($id);
+        // dd($role_user_status);
+        $user->roles()->updateExistingPivot($role, array('role_user_status' => $role_user_status));
+        // session()->flash("successful update");
+        return redirect('/userrole/' . $id);
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -119,5 +144,14 @@ class RoleController extends Controller
                 'deleted' => 1, 'deleted_on' => date('Y-m-d H:i:s'), 'deleted_by' => Auth::user()->id
             ]);
         return redirect('/roles');
+    }
+    public function destroyUserRole(Request $request, $id)
+    {
+        $role = $request->role_id;
+        $user = User::find($id);
+        // $user->roles()->detach($role);
+        $user->roles()->updateExistingPivot($role, array('deleted' => 1, 'deleted_on' => date('Y-m-d H:i:s'), 'deleted_by' => Auth::user()->id));
+        session()->flash("Role deleted successfully");
+        return back();
     }
 }

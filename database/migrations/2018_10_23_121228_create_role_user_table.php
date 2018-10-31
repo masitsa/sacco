@@ -19,6 +19,11 @@ class CreateRoleUserTable extends Migration
             $table->foreign('role_id')->references('id')->on('roles');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('role_user_status');
+            $table->tinyInteger('deleted')->default(0);
+            $table->timestamp('deleted_on')->nullable();
+            $table->integer('deleted_by')->nullable();
+            $table->integer('created_by')->nullable();
             $table->timestamps();
         });
     }
