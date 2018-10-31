@@ -16,13 +16,26 @@
 // });
 
 //user routes
-Route::get('/adduser', 'UserController@create');
-Route::post('/adduser', 'UserController@store');
-Route::get('/users', 'UserController@index');
-Route::get('/users/edit/{userId}', 'UserController@edit');
-Route::patch('/users/{userId}', 'UserController@update');
-Route::patch('/usersdelete/{userId}', 'UserController@destroy');
-Route::get('/loggedusers', 'UserController@loggedUser');
+// Admin routes
+Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
+{
+        Route::get('/adduser', 'UserController@create')->name('adduser');
+        Route::post('/adduser', 'UserController@store');
+        Route::get('/users', 'UserController@index');
+        Route::get('/users/edit/{userId}', 'UserController@edit');
+        Route::patch('/users/{userId}', 'UserController@update');
+        Route::patch('/usersdelete/{userId}', 'UserController@destroy');
+        Route::get('/loggedusers', 'UserController@loggedUser');
+        //role routes
+        Route::get('/roles', 'RoleController@index');
+        Route::get('/role/create', 'RoleController@create');
+        Route::get('/roles/edit/{id}', 'RoleController@edit');
+        Route::post('/roles', 'RoleController@store');
+        Route::post('/userrole/{id}', 'RoleController@storeUserRole');
+        Route::patch('/roles/{id}', 'RoleController@update');
+        Route::patch('/roles/{id}', 'RoleController@destroy');
+
+});
 
 //next of kin
 Route::get('/nextofkin', 'NextofKinController@index');
