@@ -42,18 +42,18 @@
       <td>{{ $expense->deleted_on }}</td>
       <td>
          @foreach($users as $item)
-         @if($item->id==$user->deleted_by)
+         @if($item->id==$expense->deleted_by)
          {{$item->user_first_name}}
-         @elseif($user->deleted_by== null)
+         @elseif($expense->deleted_by== null)
          _
          @endif
          @endforeach
       </td>
       @if($expense->deleted_on ==0 || Auth::user()->id)
       <td>
-       <td><a href ="/users/edit/{{$user->id}}" class="btn btn-sm btn-primary">edit</a></td>
+       <td><a href ="/expense/edit/{{$expense->id}}" class="btn btn-sm btn-primary">edit</a></td>
       <td>
-         <form action="/usersdelete/{{$user->id}}" method="post" onsubmit()="are you sure you want to delete">
+         <form action="/expensedelete/{{$expense->expenseTypeid}}" method="post" onsubmit()="are you sure you want to delete">
             {{ csrf_field() }}
             {{ method_field('PATCH') }}
             <button class="btn btn-sm btn-danger"  type="submit">delete</button>

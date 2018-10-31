@@ -11,13 +11,13 @@
                   <div class="form-group row">
                      <label for="user_first_name" class="col-md-4 col-form-label text-md-right">Expense Name</label>
                      <div class="col-md-6">
-                        <input class="form-control" type="text" name="Expense name">
+                        <input class="form-control" type="text" name="expense_name">
                      </div>
                   </div>
                   <div class="form-group row">
                      <label for="user_first_name" class="col-md-4 col-form-label text-md-right">Expense Type</label>
                      <div class="col-md-6">
-                        <select name="expense_type" class="form-control">
+                        <select name="expense_type_id" class="form-control">
                            <option value="">--select Expense--</option>
                            @if(count($expensesTypes))
                            @foreach($expensesTypes as $expenseType)

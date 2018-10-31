@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Expense;
 use App\User;
 use App\ExpenseType;
+use Auth;
 class ExpenseController extends Controller
 {
     /**
@@ -48,10 +49,9 @@ class ExpenseController extends Controller
             'expense_type_id' => 'required',
         ]);
          Expense::create(request([
-            'expense_name' , 'expense_type_id' ,  'created_by' => Auth::user()->id,
-            'role' => 'official',
+            'expense_name' , 'expense_type_id' ,  'created_by' => Auth::user()->id
         ]));
-
+        session()->flash("success message", "you have created an expense");
         return redirect('/expenses');
     }
 
