@@ -36,6 +36,9 @@ Route::get('/nextOfKin/delete/{id}','NextofKinController@destroy');
 Route::get('/expenses', 'ExpenseController@index');
 Route::get('/addexpense', 'ExpenseController@create');
 Route::post('/addExpense', 'ExpenseController@store');
+Route::get('/expense/edit/{id}', 'ExpenseController@edit');
+Route::patch('/expenses/{expenseId}', 'ExpenseController@update'); 
+
 
 Auth::routes();
 

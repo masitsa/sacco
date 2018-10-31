@@ -4,14 +4,14 @@
    <div class="row justify-content-left">
       <div class="col-md-8">
          <div class="card">
-            <form method="POST" action="/nextOfKin/{{$nextOfKin->id}}">
+            <form method="POST" action="/expenses/{{$expenses->id}}">
                {{ csrf_field() }}
                {{ method_field('PATCH') }}
                <div class="form-group" >
                   <label for="title">First Name</label>
-                  <input type="text" class="form-control" name="next_of_kin_first_name"  value="{{$nextOfKin->next_of_kin_first_name}}">
+                  <input type="text" class="form-control" name="expense_name"  value="{{$expenses->expense_name}}">
                </div>
-               <div class="form-group row">
+               <div class="form-group ">
                      <label for="user_first_name" class="col-md-4 col-form-label text-md-right">Expense Type</label>
                      <div class="col-md-6">
                         <select name="expense_type_id" class="form-control">
@@ -24,7 +24,7 @@
                         </select>
                      </div>
               
-               <a href="nextofkin" class="btn btn-warning">Go Back</a>
+               <a href="expenses" class="btn btn-warning">Go Back</a>
                <button type="submit" class="btn btn-primary">Update</button>
             </form>
          </div>
