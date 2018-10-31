@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Saving;
 use App\Member;
@@ -29,9 +30,22 @@ class SavingController extends Controller
     public function create()
     {
         // create page
-        $members = Member::all();
-        $saving_types = SavingType::all();
-        return view('savings.create', compact('members', 'saving_types'));
+        // $members = Member::all();
+        // $saving_types = SavingType::all();
+        // return view('savings.create', compact('members', 'saving_types'));
+        return view('savings.create');
+    }
+
+    public function search(){
+        $member_id = Input::get('member_id');
+        if ($member_id != "") {
+            $member = Member::where('employer_id', 'LIKE', '%' . $member_id . '%')->get();
+            // check if any records have been return
+            if (count($member) > 0) {
+                return view('savings.create')->withDetails($member)->withQuery($member_id);
+            }
+        }
+        return view('savings.create')->withMessage("No details found, try searching again!");
     }
 
     /**

@@ -47,6 +47,7 @@ Route::patch('/roles/{id}', 'RoleController@destroy');
 // Savings routes
 Route::get('/savings', 'SavingController@index');
 Route::get('/savings/create', 'SavingController@create');
+Route::post('/search', 'SavingController@search');
 Route::post('/savings', 'SavingController@store');
 Route::get('/savings/edit/{id}', 'SavingController@edit');
 Route::patch('/savings/{id}', 'SavingController@update');
