@@ -46,8 +46,10 @@
                     Expenses
                 </a>
                 <div class="dropdown-menu" aria-labelledby="reportsDropdownMenu">
-                    <a class="dropdown-item" href="#">Capture Expenses</a>
-                    <a class="dropdown-item" href="#">Define Expense Type</a>
+                    <a class="dropdown-item" href="/expenses"> Expenses</a>
+                    <a class="dropdown-item" href="/addexpense"> Capture expense</a>
+                    <a class="dropdown-item" href="/addexpensesType">Define Expense Type</a>
+                    <a class="dropdown-item" href="/expensesType">Show Expense Types</a>
                 </div>
             </li>
             

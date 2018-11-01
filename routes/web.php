@@ -51,6 +51,11 @@ Route::get('/addexpense', 'ExpenseController@create');
 Route::post('/addExpense', 'ExpenseController@store');
 Route::get('/expense/edit/{id}', 'ExpenseController@edit');
 Route::patch('/expenses/{expenseId}', 'ExpenseController@update'); 
+//expens type routes
+Route::get('/expensesType', 'ExpenseTypeController@index');
+Route::get('/addexpensesType', 'ExpenseTypeController@create');
+Route::post('/addexpensesType', 'ExpenseTypeController@store');
+Route::get('//expenseType/edit/{expenseTypeid}', 'ExpenseTypeController@edit');
 
 
 Auth::routes();
