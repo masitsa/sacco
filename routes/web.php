@@ -17,8 +17,7 @@
 
 //user routes
 // Admin routes
-Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
-{
+Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function () {
         Route::get('/adduser', 'UserController@create')->name('adduser');
         Route::post('/adduser', 'UserController@store');
         Route::get('/users', 'UserController@index');
@@ -36,14 +35,20 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
         Route::patch('/roles/{id}', 'RoleController@destroy');
 
 });
-
+//employers
+Route::get('/createemployer', 'EmployerController@create');
+Route::post('/employerstore', 'EmployerController@store');
+Route::get('/employer', 'EmployerController@index');
+Route::get('/employer/edit/{id}', 'EmployerController@edit');
+Route::patch('/employer/{id}', 'EmployerController@update');
+Route::patch('/employerdelete/{id}', 'EmployerController@destroy');
 //next of kin
 Route::get('/nextofkin', 'NextofKinController@index');
 Route::post('/kin', 'NextofKinController@store');
 Route::get('/nextofkin/create/{id}', 'NextofKinController@create');
 Route::get('/nextOfKin/edit/{id}', 'NextofKinController@edit');
 Route::patch('/nextOfKin/{id}', 'NextofKinController@update');
-Route::get('/nextOfKin/delete/{id}','NextofKinController@destroy');
+Route::get('/nextOfKin/delete/{id}', 'NextofKinController@destroy');
 
 //expenses routes
 Route::get('/expenses', 'ExpenseController@index');
@@ -57,13 +62,16 @@ Route::get('/expensesType', 'ExpenseTypeController@index');
 Route::get('/addexpensesType', 'ExpenseTypeController@create');
 Route::post('/addexpensesType', 'ExpenseTypeController@store');
 Route::get('/expenseType/edit/{expenseTypeid}', 'ExpenseTypeController@edit');
+<<<<<<< HEAD
 Route::patch('/expensesType/{expenseTypeId}', 'ExpenseTypeController@update'); 
+=======
+>>>>>>> be4a095b8e6ee33c6ca7120ba2f59bb82240e506
 
 
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/admins','HomeController@adminHome');
+Route::get('/admins', 'HomeController@adminHome');
 
 //role routes
 Route::get('/roles', 'RoleController@index');
@@ -78,24 +86,24 @@ Route::patch('/userroleupdate/{id}', 'RoleController@updateUserRole');
 Route::patch('/userroledestroy/{id}', 'RoleController@destroyUserRole');
 
 //Loans routes
-Route::get('/loanApplication', 'LoanController@index' );
-Route::get('/searchMember/{member}', 'LoanController@create' );
-Route::get('/loanApplication/{id}', 'LoanController@createLoan' );
-Route::post('/loansCreate', 'LoanController@store' );
+Route::get('/loanApplication', 'LoanController@index');
+Route::get('/searchMember/{member}', 'LoanController@create');
+Route::get('/loanApplication/{id}', 'LoanController@createLoan');
+Route::post('/loansCreate', 'LoanController@store');
         //disburse Loan
-Route::get('/disburseLoan', 'LoanDisbursmentController@index' );
+Route::get('/disburseLoan', 'LoanDisbursmentController@index');
         //Loan Amortization
-Route::get('/amortization', 'LoanAmortizationController@index' );
+Route::get('/amortization', 'LoanAmortizationController@index');
 // Route::get('/amortizationSearch/{name}', function(){
 //     dd('yes');
 // } );
-Route::get('/amortizationSearch/{name}', 'LoanAmortizationController@create' );
-Route::get('/fetchLoans/{id}', 'LoanAmortizationController@fetchLoans' );
+Route::get('/amortizationSearch/{name}', 'LoanAmortizationController@create');
+Route::get('/fetchLoans/{id}', 'LoanAmortizationController@fetchLoans');
 //members
 Route::get('/members', 'MemberController@index');
 Route::get('/members/create', 'MemberController@create');
 Route::post('/members', 'MemberController@store');
-Route::get('/members/edit/{id}','MemberController@edit' );
+Route::get('/members/edit/{id}', 'MemberController@edit');
 Route::patch('/members/{id}', 'MemberController@update');
 Route::get('/members/delete/{id}', 'MemberController@destroy');
 
@@ -103,12 +111,14 @@ Route::get('/members/delete/{id}', 'MemberController@destroy');
 Route::get('/documents', 'MemberdocumentController@index');
 Route::get('/documents/create/{id}', 'MemberdocumentController@create');
 Route::post('/documents', 'MemberdocumentController@store');
-Route::get('/documents/edit/{id}','MemberdocumentController@edit');
+Route::get('/documents/edit/{id}', 'MemberdocumentController@edit');
 Route::patch('/documents/{id}', 'MemberdocumentController@update');
-Route::get('/documents/delete/{id}','MemberdocumentController@destroy');
+Route::get('/documents/delete/{id}', 'MemberdocumentController@destroy');
 // Savings routes
 Route::get('/savings', 'SavingController@index');
-Route::get('/savings/create', 'SavingController@create');
+Route::get('/savings/create/{id}', 'SavingController@create');
+Route::get('/savings/search_member', 'SavingController@search_member');
+Route::post('/search', 'SavingController@search');
 Route::post('/savings', 'SavingController@store');
 Route::get('/savings/edit/{id}', 'SavingController@edit');
 Route::patch('/savings/{id}', 'SavingController@update');

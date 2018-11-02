@@ -8,6 +8,7 @@
         <table class="table table-bordered table-condensed table-striped table-hover">
             <tr>
                 <th>Id</th>
+                <th>Employer Name</th>
                 <th>Member Number</th>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -17,17 +18,20 @@
                 <th>Postal Address</th>
                 <th>Postal Code</th>
                 <th>Payroll Number</th>
-                <th>Deleted</th>
-                <th>Deleted by</th>
-                <th>Deleted on</th>
                 <th>Created by</th>
                 <th>Created at</th>
+                <th>Updated at</th>
+                <th>Deleted</th>
+                <th>Deleted on</th>
+                <th>Deleted by</th>
+               
             <th colspan="4" style="text-align:center"> Actions</th>
 
         </tr>
         @foreach($members as $member)
    <tr>
       <td>{{ $member->id }}</td>
+      <td>{{ $member->employer->employer_name }}</td>
       <td>{{ $member->member_number}} </td>
       <td>{{ $member->member_first_name }} </td>
       <td>{{ $member->member_last_name }}</td>
@@ -38,24 +42,33 @@
       <td>{{ $member->member_postal_code }}</td>
       <td>{{ $member->member_payroll_number }}</td>
       <td>
-         @if($member->created_at)
+            @if($member->created_by != null)
+            
+                {{ $member->created_by }}
+                
+            @else
+            -
+            @endif
+         </td>
+      <td>
+         @if($member->created_at != null)
          {{ $member->created_at->toFormattedDateString() }}
          @else
-         {{ $member->created_at }}
+         -
          @endif
       </td>
       <td>
-         @if($member->created_at)
+         @if($member->updated_at)
          {{ $member->updated_at->toFormattedDateString() }}
          @else
-         {{ $member->created_at }}
+         {{ $member->updated_at }}
          @endif
       </td>
       <td>
-         @if( $member->deleted==1 )
+         @if( $member->deleted == 1 )
          <font size="3" color="red">deleted</font>
          @else()
-         Not deleted
+         <font size="3" color="green"> Not deleted</font>
          @endif
       </td>
       <td>
@@ -66,8 +79,11 @@
       @endif
       </td>
       <td>
-         {{$member->deleted_by}}
-        
+        @if($member->deleted_by != null)
+        {{ $member->deleted_by }}
+        @else
+        -
+        @endif
       </td>
       <td><a href ="/nextofkin/create/{{$member->id}}" class="btn btn-sm btn-primary">Add Next of Kin</a></td>
       <td><a href ="documents/create/{{$member->id}}" class="btn btn-sm btn-primary">Add Member Document</a></td>

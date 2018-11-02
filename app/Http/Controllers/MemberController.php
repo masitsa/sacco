@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Member;
-
+use App\Employer;
 use Auth;
 
 class MemberController extends Controller
@@ -18,6 +18,17 @@ class MemberController extends Controller
     public function index()
     {
         $members = Member::all();
+        // $member = Member::find(4);
+        // $some= $member->employer->employer_name;
+        // var_dump($some);
+        // foreach($members as $member){
+        //     $some=$member->employer;
+        //     var_dump($some->employer_name);
+        //     // $woo=$some['employer_name'];
+        //     // return $woo;
+            
+        // }
+        // dd($s);
         return view('members.index', compact('members'));
     }
 
@@ -29,7 +40,8 @@ class MemberController extends Controller
     public function create()
     {
         $members = Member::all();
-        return view('members.create', compact('members'));
+        $employers= Employer::all();
+        return view('members.create', compact('members','employers'));
     }
 
     /**
@@ -41,6 +53,7 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
+            'employer_id' =>'required',
             'member_first_name' =>'required',
             'member_last_name' =>'required',
             'member_national_id' =>'required',
@@ -53,7 +66,9 @@ class MemberController extends Controller
             'member_number' =>'required',
             'member_payroll_number' =>'required'
         ]);
-        Member::create(request(['member_first_name',
+        Member::create(request([
+            'employer_id',
+            'member_first_name',
             'member_last_name',
             'member_national_id',
             'member_email',

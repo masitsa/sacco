@@ -36,7 +36,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="rolesDropdownMenu">
                 <a class="dropdown-item" href="/savings">View Savings</a>
-                <a class="dropdown-item" href="/savings/create">Create/Upload Savings</a>
+                <a class="dropdown-item" href="/savings/search_member">Create/Upload Savings</a>
                 <a class="dropdown-item" href="#">Upload Savings</a>
                 <a class="dropdown-item" href="#">Transfer Savings</a>
                 </div>
@@ -58,9 +58,9 @@
                     Employers
                 </a>
                 <div class="dropdown-menu" aria-labelledby="reportsDropdownMenu">
-                    <a class="dropdown-item" href="#">Create Employer</a>
+                    <a class="dropdown-item" href="/createemployer">Create Employer</a>
                     <a class="dropdown-item" href="#">Update Details</a>
-                    <a class="dropdown-item" href="#">View & Manage Employer</a>
+                    <a class="dropdown-item" href="/employer">View & Manage Employer</a>
                 </div>
             </li>
             

@@ -35,12 +35,12 @@
             @endif
             @if($role->deleted_by == NULL || "")
                 <td>-</td>
-            @else()
+            @else
             <td>{{Auth::user()->user_first_name}}</td>
             @endif
             @if($role->deleted_on == NULL || "")
                 <td>-</td>
-            @else()
+            @else
             <td>{{$role->deleted_on}}</td>
             @endif
             <td>{{Auth::user()->user_first_name}}</td>

@@ -6,6 +6,15 @@
         @csrf
         <div class="form-group col-md-6">
             <br>
+            <label for="employerName">Employer Name</label>
+            <select name="employer_id" id="employer_id" class="form-control">
+                <option value="">Select Employer</option>
+                @foreach($employers as $employer)
+                    <option value="{{$employer->id}}">{{$employer->employer_name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group col-md-6">
             <label for="firstName">First Name</label>
             <input class="form-control" type="text" name="member_first_name">
         </div>

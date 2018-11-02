@@ -70,14 +70,14 @@
       </td>
       <td><!-- Button trigger modal -->
         
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#assignRoleModal">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#assignRoleModal{{$user->id}}">
             Asign role
         </button></td>
       
         
 
         <!-- Modal -->
-        <div class="modal fade" id="assignRoleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="assignRoleModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
@@ -101,7 +101,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button class="btn btn-primary">Assign role</button>
+                        <button class="btn btn-primary" onclick="alert({{$user->id}})">Assign role</button>
                     </div>
                 </form>
             </div>
