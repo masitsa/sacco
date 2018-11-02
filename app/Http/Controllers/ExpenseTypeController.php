@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Expense;
-use App\User;
 use App\ExpenseType;
 use Auth;
-class ExpenseController extends Controller
+use App\User;
+
+class ExpenseTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,10 @@ class ExpenseController extends Controller
     public function index()
     {
         //
+        $expensesTypes = ExpenseType::all();
         $users = User::all();
-        $expenses = Expense::all();
 
-        return view('Expenses.index',compact('users','expenses'));
+        return view('expenseType.index',compact('expensesTypes','users'));
     }
 
     /**
@@ -31,8 +31,7 @@ class ExpenseController extends Controller
     public function create()
     {
         //
-        $expensesTypes = ExpenseType::all();
-        return view('Expenses.createExpense', compact('expensesTypes'));
+        return view("expenseType.create");
     }
 
     /**
@@ -45,14 +44,13 @@ class ExpenseController extends Controller
     {
         //
         $this->validate(request(), [
-            'expense_name' => 'required',
-            'expense_type_id' => 'required',
+            'expense_type_name' => 'required',
         ]);
-         Expense::create(request([
-            'expense_name' , 'expense_type_id' ,  'created_by' => Auth::user()->id
+         ExpenseType::create(request([
+            'expense_type_name' ,  'created_by' => Auth::user()->id
         ]));
-        session()->flash("success message", "you have created an expense");
-        return redirect('/expenses');
+        session()->flash("success message", "you have created an expenseType");
+        return redirect('/expensesType');
     }
 
     /**
@@ -75,11 +73,9 @@ class ExpenseController extends Controller
     public function edit($id)
     {
         //
+        $expensesTypes =  ExpenseType::find($id);
 
-        $expenses = Expense::find($id);
-        $expensesTypes = ExpenseType::all();
-
-        return view('Expenses.edit', compact('expenses','expensesTypes'));
+        return view('expenseType.edit', compact('expensesTypes'));
     }
 
     /**
@@ -92,16 +88,6 @@ class ExpenseController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate(request(), [
-            'expense_name' => 'required',
-            'expense_type' => 'required',
-           
-        ]);
-        //posting to database
-
-        Expense::where('id', $id)->update(request(['expense_name', 'expense_type']));
-
-        return redirect('/expenses');
     }
 
     /**
