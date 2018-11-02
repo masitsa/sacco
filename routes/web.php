@@ -86,7 +86,8 @@ Route::patch('/documents/{id}', 'MemberdocumentController@update');
 Route::get('/documents/delete/{id}', 'MemberdocumentController@destroy');
 // Savings routes
 Route::get('/savings', 'SavingController@index');
-Route::get('/savings/create', 'SavingController@create');
+Route::get('/savings/create/{id}', 'SavingController@create');
+Route::get('/savings/search_member', 'SavingController@search_member');
 Route::post('/search', 'SavingController@search');
 Route::post('/savings', 'SavingController@store');
 Route::get('/savings/edit/{id}', 'SavingController@edit');

@@ -27,25 +27,29 @@ class SavingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        // create page
-        // $members = Member::all();
-        // $saving_types = SavingType::all();
-        // return view('savings.create', compact('members', 'saving_types'));
-        return view('savings.create');
+        $members = Member::all();
+        $saving_types = SavingType::all();
+        return view('savings.create', compact('members', 'saving_types'));
     }
 
+    // show search member form
+    public function search_member(){
+        return view('savings.search_member');
+    }
+
+    // search member function
     public function search(){
-        $member_id = Input::get('member_id');
-        if ($member_id != "") {
-            $member = Member::where('employer_id', 'LIKE', '%' . $member_id . '%')->get();
+        $member_number = Input::get('member_number');
+        if ($member_number != "") {
+            $member = Member::where('member_number', 'LIKE', '%' . $member_number . '%')->get();
             // check if any records have been return
             if (count($member) > 0) {
-                return view('savings.create')->withDetails($member)->withQuery($member_id);
+                return view('savings.search_member')->withDetails($member)->withQuery($member_number);
             }
         }
-        return view('savings.create')->withMessage("No details found, try searching again!");
+        return view('savings.search_member')->withMessage("No details found, try searching again!");
     }
 
     /**
@@ -56,7 +60,22 @@ class SavingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validate the data
+        $this->validate(request(),[
+            'member_id'=>'required',
+            'saving_type_id'=>'required',
+            'saving_amount'=>'required'
+        ]);
+        Saving::create(request([
+            'member_id','saving_type_id','saving_amount'
+        ]));
+        // $saving = new Saving();
+        // $saving->member_id = $request->member_id;
+        // $saving->saving_type_id = $request->input('saving_type_id');
+        // $saving->saving_amount = $request->input('saving_amount');
+
+        // $saving->save();
+        return redirect('/savings');
     }
 
     /**

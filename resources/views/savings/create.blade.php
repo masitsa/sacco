@@ -3,50 +3,37 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-11">
                 <div class="card">
                     <div class="card-body">
                         <h4>Create Savings</h4>
-                        <form action="/search" method="POST" role="search">
-                            {{ csrf_field() }}
-                            <div class="input-group">
-                                <input type="text" name="member_id" class="form-control" placeholder="enter member number...">
-                                <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-success">
-                                        <span class="fa fa-search"></span>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
-                        @if(isset($details))
-                            <p>Search details for <b>{{$query}}</b> are: </p>
-                            <h2>Sample User details</h2>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Employment No</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($details as $member)
-                                    <tr>
-                                        <td>{{$member->employer_id}}</td>
-                                        <td>{{$member->member_first_name}}</td>
-                                        <td>{{$member->member_last_name}}</td>
-                                        <td>{{$member->member_email}}</td>
-                                        <td>{{$member->member_phone_number}}</td>
-                                    </tr>
+                        <form class="form-horizontal" action="/savings" method="POST">
+                            {{csrf_field()}}
+                            <input type="hidden" name="member_id"/>
+                            <div class="form-group">
+                                <label for="savingtype">Saving type</label>
+                                <select class="form-control" name="saving_type_id">
+                                    <option selected>choose type...</option>
+                                    @foreach($saving_types as $saving_type)
+                                        @if($saving_type->id == "1")
+                                            <option value="{{$saving_type->id}}">{{"Shared Capital"}}</option>
+                                        @endif
+                                        @if($saving_type->id == "2")
+                                            <option value="{{$saving_type->id}}">{{"Share Contribution"}}</option>
+                                        @endif
+                                        @if($saving_type->id == "3")
+                                            <option value="{{$saving_type->id}}">{{"Withdrawals"}}</option>
+                                        @endif
                                     @endforeach
-                                </tbody>
-                            </table>
-                        @elseif(isset($message))
-                            <p>{{$message}}</p>
-                        @endif
-                        
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Saving amount</label>
+                                <input type="number" class="form-control" name="saving_amount" placeholder="enter amount...">
+                            </div>
+                    
+                            <button type="submit" class="btn btn-sm btn-success">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>        
