@@ -17,8 +17,9 @@
       <label for="memberDocument">Select Document Type</label>
       <select name="document_type_id" class="form-control">
       @foreach($memberdocumenttypes as $memberdocumenttype)
-      <option value="{{$memberdocumenttype->id}}">{{$memberdocumenttype->document_type_name}}</option>
+        <option value="{{$memberdocumenttype->id}}">{{$memberdocumenttype->document_type_name}}</option>
       @endforeach
+      </select>
     </div>
     <div class="form-group col-md-6">
       <label for="document">Select document to upload</label>

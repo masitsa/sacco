@@ -56,9 +56,9 @@
                     Employers
                 </a>
                 <div class="dropdown-menu" aria-labelledby="reportsDropdownMenu">
-                    <a class="dropdown-item" href="#">Create Employer</a>
+                    <a class="dropdown-item" href="/createemployer">Create Employer</a>
                     <a class="dropdown-item" href="#">Update Details</a>
-                    <a class="dropdown-item" href="#">View & Manage Employer</a>
+                    <a class="dropdown-item" href="/employer">View & Manage Employer</a>
                 </div>
             </li>
             
