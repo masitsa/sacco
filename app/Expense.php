@@ -15,4 +15,10 @@ class Expense extends Model
         return $this->belongsTo('App\LoanType');
 
 }
+    public function user()
+        {
+            return $this->belongsTo('App\User');
+
+    }
+
 }

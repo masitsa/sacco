@@ -36,7 +36,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="rolesDropdownMenu">
                 <a class="dropdown-item" href="/savings">View Savings</a>
-                <a class="dropdown-item" href="/savings/create">Create/Upload Savings</a>
+                <a class="dropdown-item" href="/savings/search_member">Create/Upload Savings</a>
                 <a class="dropdown-item" href="#">Upload Savings</a>
                 <a class="dropdown-item" href="#">Transfer Savings</a>
                 </div>
@@ -46,8 +46,10 @@
                     Expenses
                 </a>
                 <div class="dropdown-menu" aria-labelledby="reportsDropdownMenu">
-                    <a class="dropdown-item" href="#">Capture Expenses</a>
-                    <a class="dropdown-item" href="#">Define Expense Type</a>
+                    <a class="dropdown-item" href="/expenses"> Expenses</a>
+                    <a class="dropdown-item" href="/addexpense"> Capture expense</a>
+                    <a class="dropdown-item" href="/addexpensesType">Define Expense Type</a>
+                    <a class="dropdown-item" href="/expensesType">Show Expense Types</a>
                 </div>
             </li>
             

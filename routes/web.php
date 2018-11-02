@@ -55,7 +55,12 @@ Route::get('/expenses', 'ExpenseController@index');
 Route::get('/addexpense', 'ExpenseController@create');
 Route::post('/addExpense', 'ExpenseController@store');
 Route::get('/expense/edit/{id}', 'ExpenseController@edit');
-Route::patch('/expenses/{expenseId}', 'ExpenseController@update');
+Route::patch('/expenses/{expenseId}', 'ExpenseController@update'); 
+//expens type routes
+Route::get('/expensesType', 'ExpenseTypeController@index');
+Route::get('/addexpensesType', 'ExpenseTypeController@create');
+Route::post('/addexpensesType', 'ExpenseTypeController@store');
+Route::get('/expenseType/edit/{expenseTypeid}', 'ExpenseTypeController@edit');
 
 
 Auth::routes();
@@ -106,7 +111,9 @@ Route::patch('/documents/{id}', 'MemberdocumentController@update');
 Route::get('/documents/delete/{id}', 'MemberdocumentController@destroy');
 // Savings routes
 Route::get('/savings', 'SavingController@index');
-Route::get('/savings/create', 'SavingController@create');
+Route::get('/savings/create/{id}', 'SavingController@create');
+Route::get('/savings/search_member', 'SavingController@search_member');
+Route::post('/search', 'SavingController@search');
 Route::post('/savings', 'SavingController@store');
 Route::get('/savings/edit/{id}', 'SavingController@edit');
 Route::patch('/savings/{id}', 'SavingController@update');
