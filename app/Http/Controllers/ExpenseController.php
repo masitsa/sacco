@@ -100,6 +100,14 @@ class ExpenseController extends Controller
         //posting to database
 
         Expense::where('id', $id)->update(request(['expense_name', 'expense_type']));
+        $this->validate(request(), [
+            'expense_name' => 'required',
+            'expense_type' => 'required',
+           
+        ]);
+        //posting to database
+
+        Expense::where('id', $id)->update(request(['expense_name', 'expense_type']));
 
         return redirect('/expenses');
     }

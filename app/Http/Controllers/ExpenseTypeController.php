@@ -88,6 +88,24 @@ class ExpenseTypeController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate(request(), [
+            'expense_type_name' => 'required'
+          
+           
+        ]);
+        //posting to database
+
+        ExpenseType::where('id', $id)->update(request(['expense_type_name']));
+        $this->validate(request(), [
+            'expense_type_name' => 'required'
+            
+           
+        ]);
+        //posting to database
+
+        ExpenseType::where('id', $id)->update(request(['expense_type_name']));
+
+        return redirect('/expensesType');
     }
 
     /**

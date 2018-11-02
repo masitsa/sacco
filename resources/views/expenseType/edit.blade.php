@@ -1,29 +1,37 @@
-@extends('layouts.master')
+@extends('layouts.official')
 @section('content')
 <div class="container">
-   <div class="row justify-content-center">
-      <div class="col-md-8">
+   <div class="row justify-content-left">
+      <div class="col-md-6">
          <div class="card">
-            <div class="card-header">Edit Expense Type</div>
-            <div class="card-body">
-               <form method="POST" action="/expensesType/{{$expensesTypes->id}}">
-                  @csrf
-                  <div class="form-group row">
-                     <label for="user_first_name" class="col-md-4 col-form-label text-md-right">Expense Name</label>
+         <div class="card-header">Edit Expense</div>
+            <form method="POST" action="/expenses/{{$expenses->id}}">
+               {{ csrf_field() }}
+               {{ method_field('PATCH') }}
+               <div class="form-group" >
+               <label for="expense_name" class="col-md-4 col-form-label text-md-right">Expense Name</label>
+               <div class="col-md-6">
+                  <input type="text" class="form-control" name="expense_name"  value="{{$expenses->expense_name}}">
+                  </div>
+               </div>
+               <div class="form-group ">
+                     <label for="expense_type" class="col-md-4 col-form-label text-md-right">Expense Type</label>
                      <div class="col-md-6">
-                        <input class="form-control" type="text" name="expense_type_name" value="{{$expensesTypes->expense_type_name}}">
+                        <select name="expense_type_id" class="form-control">
+                           <option value="">--select Expense--</option>
+                           @if(count($expensesTypes))
+                           @foreach($expensesTypes as $expenseType)
+                           <option value="{{$expenseType->id}}">{{$expenseType->expense_type_name}}</option>
+                           @endforeach
+                           @endif
+                        </select>
                      </div>
-                  </div>
-                  
-                  <div class="form-group row mb-0">
-                     <div class="col-md-6 offset-md-4">
-                        <button type="submit" class="btn btn-primary">
-                        Submit
-                        </button>
-                     </div>
-                  </div>
-               </form>
-            </div>
+                     <div>
+              
+               <a href="expenses" class="btn btn-warning">Go Back</a>
+               <button type="submit" class="btn btn-primary">Update</button>
+               </div>
+            </form>
          </div>
       </div>
    </div>

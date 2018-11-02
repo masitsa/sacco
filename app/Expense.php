@@ -12,7 +12,7 @@ class Expense extends Model
     
     public function expenseType()
     {
-        return $this->belongsTo('App\LoanType');
+        return $this->belongsTo('App\ExpenseType');
 
 }
     public function user()
@@ -20,5 +20,7 @@ class Expense extends Model
             return $this->belongsTo('App\User');
 
     }
+
+    
 
 }
