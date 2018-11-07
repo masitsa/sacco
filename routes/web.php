@@ -62,10 +62,7 @@ Route::get('/expensesType', 'ExpenseTypeController@index');
 Route::get('/addexpensesType', 'ExpenseTypeController@create');
 Route::post('/addexpensesType', 'ExpenseTypeController@store');
 Route::get('/expenseType/edit/{expenseTypeid}', 'ExpenseTypeController@edit');
-<<<<<<< HEAD
-Route::patch('/expensesType/{expenseTypeId}', 'ExpenseTypeController@update'); 
-=======
->>>>>>> be4a095b8e6ee33c6ca7120ba2f59bb82240e506
+Route::patch('/expenseType/{expenseTypeId}', 'ExpenseTypeController@update'); 
 
 
 Auth::routes();

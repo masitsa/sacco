@@ -1,45 +1,28 @@
-@extends('layouts.master')
+@extends('layouts.official')
+
 @section('content')
 <div class="container">
-   <div class="row justify-content-center">
-      <div class="col-md-8">
-         <div class="card">
-            <div class="card-header">Edit Expense Type</div>
-            <div class="card-body">
-               <form method="POST" action="/expenses/{{$expenses->id}}">
-                  @csrf
-                  {{ method_field('PATCH') }}
-                  <div class="form-group row">
-                     <label for="expense_type_name" class="col-md-4 col-form-label text-md-right">Expense Name</label>
-                     <div class="col-md-6">
-                        <input class="form-control" type="text" name="expense_name" value="{{$expenses->expense_name}}">
-                     </div>
-                  </div>
-                  <div class="form-group ">
-                     <label for="expense_type" class="col-md-4 col-form-label text-md-right">Expense Type</label>
-                     <div class="col-md-6">
-                        <select name="expense_type_id" class="form-control">
-                           <option value="">--select Expense--</option>
-                           @if(count($expensesTypes))
-                           @foreach($expensesTypes as $expenseType)
-                           <option value="{{$expenseType->id}}">{{$expenseType->expense_type_name}}</option>
-                           @endforeach
-                           @endif
-                        </select>
-                     </div>
-                     <div>
-                  
-                  <div class="form-group row mb-0">
-                     <div class="col-md-6 offset-md-4">
-                        <button type="submit" class="btn btn-primary">
-                        Submit
-                        </button>
-                     </div>
-                  </div>
-               </form>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
+    <form  action="/expenses/{{$expenses->id}}" method="POST">
+        {{ csrf_field() }}
+        {{ method_field('PATCH') }}
+        <div class="form-group col-md-6">
+            <br>
+            <label for="firstName">Expense Type</label>
+            <input class="form-control" type="text" name="expense_name" value="{{$expenses->expense_name}}">
+        </div>
+        <div class="form-group col-md-6">
+            <br>
+            <label for="expenseName">Employer Name</label>
+            <select name="expenseName_id" id="expenseName_id" class="form-control">
+                <option value="">Select Expense Type</option>
+                @foreach($expensetypes as $expensetype)
+                    <option value="{{$expensetype->id}}">{{$expensetype->expense_type_name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <a href="/documents" class="btn btn-warning">Go Back</a>
+            <button class="btn btn-primary sm" type="submit">update</button>
+        </div>
+    </form>
 @endsection

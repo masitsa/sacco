@@ -17,7 +17,7 @@
    <tr>
       <td>{{ $expense->id }}</td>
       <td>{{ $expense->expense_name }} </td>
-      <td>{{ $expense->expenseType->expense_type_name }} </td>
+      <td>{{ $expense->expenseType->expense_type_name }}</td>
      <td>
          @if($expense->created_at)
          {{ $expense->created_at->toFormattedDateString() }}

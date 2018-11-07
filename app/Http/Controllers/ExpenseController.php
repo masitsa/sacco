@@ -78,6 +78,7 @@ class ExpenseController extends Controller
 
         $expenses = Expense::find($id);
         $expensesTypes = ExpenseType::all();
+      
 
         return view('Expenses.edit', compact('expenses','expensesTypes'));
     }
@@ -99,15 +100,15 @@ class ExpenseController extends Controller
         ]);
         //posting to database
 
-        Expense::where('id', $id)->update(request(['expense_name', 'expense_type']));
+        Expense::where('id', $id)->update(request(['expense_name', 'expense_type_id']));
         $this->validate(request(), [
             'expense_name' => 'required',
-            'expense_type' => 'required',
+            'expense_type_id' => 'required',
            
         ]);
         //posting to database
 
-        Expense::where('id', $id)->update(request(['expense_name', 'expense_type']));
+        Expense::where('id', $id)->update(request(['expense_name', 'expense_type_id']));
 
         return redirect('/expenses');
     }

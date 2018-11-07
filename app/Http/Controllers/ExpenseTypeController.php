@@ -74,6 +74,7 @@ class ExpenseTypeController extends Controller
     {
         //
         $expensesTypes =  ExpenseType::find($id);
+   
 
         return view('expenseType.edit', compact('expensesTypes'));
     }
